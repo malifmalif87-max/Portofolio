@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portofolio — M Alif Zaend Maulana</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --coral: #FF7F50; --coral-light: #FFE8DC; --coral-dark: #C85A2C;
+    --gray: #6B7280; --gray-light: #F3F4F6; --gray-dark: #1F2937;
+    --orange: #F97316; --orange-light: #FED7AA; --orange-dark: #C2410C;
+    --purple: #534AB7; --purple-light: #EEEDFE;
+    --amber: #BA7517; --amber-light: #FAEEDA;
+    --bg: #F9FAFB; --white: #FFFFFF; --text: #1a1a1a; --muted: #6B7280;
+    --border: rgba(0,0,0,0.08);
+  }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+  /* ===== NAV ===== */
+  nav {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 2.5rem; background: var(--white);
+    border-block-end: 1px solid var(--border);
+    position: sticky; inset-block-start: 0; z-index: 100;
+  }
+  .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.2rem; letter-spacing: -0.5px; }
+  .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--muted); font-size: 0.85rem; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--coral); }
+
+  /* ===== HERO ===== */
+  .hero { display: grid; grid-template-columns: 1fr 1fr; min-block-size: 90vh; }
+  .hero-left { padding: 4rem 2.5rem; display: flex; flex-direction: column; justify-content: center; }
+  .hero-tag {
+    display: inline-block; background: var(--coral-light); color: var(--coral);
+    font-size: 0.75rem; font-weight: 500; padding: 0.3rem 0.9rem;
+    border-radius: 100px; margin-block-end: 1.5rem; letter-spacing: 0.5px; text-transform: uppercase;
+  }
+  .hero-name {
+    font-family: 'Syne', sans-serif; font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800; line-height: 1.05; letter-spacing: -1.5px; margin-block-end: 1.2rem;
+  }
+  .hero-name span {
+    background: linear-gradient(135deg, var(--orange), var(--gray-dark));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-bio { font-size: 1rem; color: var(--muted); max-inline-size: 420px; margin-block-end: 2rem; font-weight: 300; }
+  .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--coral); color: white; border: none;
+    padding: 0.75rem 1.6rem; border-radius: 8px; font-size: 0.9rem;
+    font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif;
+    transition: opacity 0.2s;
+  }
+  .btn-primary:hover { opacity: 0.85; }
+  .btn-secondary {
+    background: transparent; color: var(--text);
+    border: 1.5px solid var(--border); padding: 0.75rem 1.6rem;
+    border-radius: 8px; font-size: 0.9rem; font-weight: 500;
+    cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background 0.2s;
+  }
+  .btn-secondary:hover { background: var(--coral-light); }
+  .hero-right {
+    background: var(--gray-dark); display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 3rem; gap: 1.5rem; position: relative; overflow: hidden;
+  }
+  .hero-right::before {
+    content: ''; position: absolute; inline-size: 300px; block-size: 300px;
+    border-radius: 50%; border: 60px solid rgba(107,114,128,0.2);
+    inset-block-start: -80px; inset-inline-end: -80px;
+  }
+  .photo-placeholder {
+    inline-size: 280px; block-size: 380px; border-radius: 20px;
+    background: linear-gradient(135deg, #F97316, #FB923C);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Sans', sans-serif; font-size: 1rem;
+    font-weight: 500; color: rgba(255,255,255,0.6);
+    border: 3px dashed rgba(255,255,255,0.3);
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .photo-placeholder::before {
+    content: '📷';
+    font-size: 3rem;
+    position: absolute;
+  }
+
+  /* ===== SECTIONS UMUM ===== */
+  section { padding: 5rem 2.5rem; }
+  .section-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: var(--coral); font-weight: 500; margin-block-end: 0.5rem; }
+  .section-title { font-family: 'Syne', sans-serif; font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 800; letter-spacing: -1px; margin-block-end: 3rem; }
+
+  /* ===== PENDIDIKAN ===== */
+  .edu-section { background: var(--white); }
+  .edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.4rem; max-inline-size: 780px; }
+  .edu-card { border-radius: 16px; padding: 1.6rem; border: 1px solid var(--border); position: relative; overflow: hidden; }
+  .edu-card::after {
+    content: ''; position: absolute; inline-size: 120px; block-size: 120px;
+    border-radius: 50%; inset-inline-end: -30px; inset-block-end: -30px; opacity: 0.12;
+  }
+  .edu-card.undip { background: #EEF3FB; border-color: #B5D4F4; }
+  .edu-card.undip::after { background: #185FA5; }
+  .edu-card.smk { background: var(--gray-light); border-color: #D1D5DB; }
+  .edu-card.smk::after { background: var(--gray); }
+  .edu-badge {
+    display: inline-block; font-size: 0.68rem; font-weight: 500;
+    text-transform: uppercase; letter-spacing: 0.8px;
+    padding: 0.25rem 0.7rem; border-radius: 100px; margin-block-end: 1rem;
+  }
+  .edu-badge.undip-badge { background: #B5D4F4; color: #0C447C; }
+  .edu-badge.smk-badge { background: #D1D5DB; color: #374151; }
+  .edu-school { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.05rem; margin-block-end: 0.3rem; }
+  .edu-school.undip-text { color: #185FA5; }
+  .edu-school.smk-text { color: #4B5563; }
+  .edu-major { font-size: 0.88rem; color: var(--text); font-weight: 500; margin-block-end: 0.2rem; }
+  .edu-period { font-size: 0.78rem; color: var(--muted); margin-block-end: 0.8rem; }
+  .edu-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
+  .edu-icon { font-size: 2rem; margin-block-end: 0.8rem; display: block; }
+
+  /* ===== SKILLS ===== */
+  .skills-section { background: var(--bg); }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.2rem; }
+  .skill-card { background: var(--white); border-radius: 14px; padding: 1.4rem; border: 1px solid var(--border); }
+  .skill-icon { inline-size: 40px; block-size: 40px; border-radius: 10px; margin-block-end: 1rem; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+  .skill-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.95rem; margin-block-end: 0.4rem; }
+  .skill-desc { font-size: 0.8rem; color: var(--muted); }
+  .bar-wrap { block-size: 4px; background: var(--border); border-radius: 2px; margin-block-start: 0.8rem; }
+  .bar-fill { block-size: 100%; border-radius: 2px; }
+
+  /* ===== EXPERIENCE ===== */
+  .exp-section { background: var(--white); }
+  .timeline { display: flex; flex-direction: column; gap: 1.5rem; max-inline-size: 720px; }
+  .exp-item { display: grid; grid-template-columns: auto 1fr; gap: 1.2rem; align-items: start; }
+  .exp-item.clickable .exp-content { cursor: pointer; transition: all 0.2s; }
+  .exp-item.clickable .exp-content:hover { background: var(--white); border-color: var(--orange); }
+  .exp-dot { inline-size: 10px; block-size: 10px; border-radius: 50%; background: var(--orange); margin-block-start: 6px; flex-shrink: 0; }
+  .exp-line { inline-size: 1px; block-size: 60px; background: var(--border); margin: 6px auto 0; display: block; }
+  .exp-dot-col { display: flex; flex-direction: column; align-items: center; }
+  .exp-content { background: var(--bg); border-radius: 14px; padding: 1.2rem 1.4rem; border: 1px solid var(--border); }
+  .exp-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; }
+  .exp-role { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; }
+  .exp-company { font-size: 0.85rem; color: var(--orange); font-weight: 500; margin-block-start: 2px; }
+  .exp-period { font-size: 0.75rem; color: var(--muted); background: var(--white); padding: 0.2rem 0.7rem; border-radius: 100px; }
+  .exp-desc { font-size: 0.82rem; color: var(--muted); margin-block-start: 0.6rem; }
+
+  /* ===== PROJECTS ===== */
+  .projects-section { background: var(--gray-dark); }
+  .projects-section .section-label { color: #FB923C; }
+  .projects-section .section-title { color: white; }
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; }
+  .proj-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 1.4rem; position: relative; overflow: hidden; cursor: pointer; transition: all 0.3s; }
+  .proj-card:hover { background: rgba(255,255,255,0.1); border-color: rgba(249,115,22,0.5); }
+  .proj-title { cursor: pointer; }
+
+  /* ===== MODAL ===== */
+  .modal { display: none; position: fixed; inset-block-start: 0; inset-inline-start: 0; inline-size: 100%; block-size: 100%; background: rgba(0,0,0,0.8); z-index: 1000; align-items: center; justify-content: center; }
+  .modal.active { display: flex; }
+  .modal-content { background: var(--gray-dark); border-radius: 16px; max-inline-size: 900px; max-block-size: 90vh; overflow-y: auto; padding: 2rem; inline-size: 90%; position: relative; color: white; }
+  .modal-close { position: absolute; inset-block-start: 1rem; inset-inline-end: 1.5rem; background: none; border: none; color: white; font-size: 1.8rem; cursor: pointer; }
+  .modal-carousel { inline-size: 100%; block-size: 400px; border-radius: 12px; margin-block-end: 2rem; position: relative; overflow: hidden; background: rgba(0,0,0,0.3); }
+  .modal-carousel .carousel-container { block-size: 100%; }
+  .modal-carousel .carousel-slide img { inline-size: 100%; block-size: 100%; object-fit: contain; }
+  .modal-carousel .carousel-arrow { position: absolute; inset-block-start: 50%; transform: translateY(-50%); inline-size: 40px; block-size: 40px; background: rgba(255,255,255,0.2); border: none; color: white; font-size: 1.3rem; cursor: pointer; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: background 0.2s; z-index: 10; }
+  .modal-carousel .carousel-arrow:hover { background: rgba(255,255,255,0.4); }
+  .modal-carousel .carousel-prev { inset-inline-start: 15px; }
+  .modal-carousel .carousel-next { inset-inline-end: 15px; }
+  .modal-carousel .carousel-nav { position: absolute; inset-block-end: 15px; inset-inline-start: 50%; transform: translateX(-50%); display: flex; gap: 10px; z-index: 10; }
+  .carousel-container { display: flex; block-size: 100%; transition: transform 0.4s ease-in-out; }
+  .carousel-slide { min-inline-size: 100%; block-size: 100%; display: flex; align-items: center; justify-content: center; }
+  .carousel-dot { inline-size: 10px; block-size: 10px; border-radius: 50%; background: rgba(255,255,255,0.4); cursor: pointer; transition: background 0.2s; }
+  .carousel-dot.active { background: rgba(255,255,255,0.95); }
+  .modal-title { font-family: 'Syne', sans-serif; font-size: 1.8rem; font-weight: 800; margin-block-end: 1rem; }
+  .modal-tag { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #FB923C; font-weight: 500; margin-block-end: 1rem; }
+  .modal-desc { font-size: 1rem; line-height: 1.8; margin-block-end: 1.5rem; color: rgba(255,255,255,0.9); }
+  .modal-tech { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+
+  /* ===== CERT MODAL ===== */
+  .cert-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 2000; align-items: center; justify-content: center; }
+  .cert-modal.active { display: flex !important; }
+  .cert-modal-content { background: white; border-radius: 16px; max-width: 900px; max-height: 90vh; overflow-y: auto; padding: 2rem; width: 95%; position: relative; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+  .cert-close { position: absolute; top: 1rem; right: 1.5rem; background: none; border: none; color: #1a1a1a; font-size: 2.2rem; cursor: pointer; font-weight: bold; transition: opacity 0.2s; }
+  .cert-close:hover { opacity: 0.6; }
+  .cert-image { width: 100%; border-radius: 12px; max-height: 600px; object-fit: contain; margin-bottom: 2rem; }
+  .cert-info { }
+  .cert-title { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800; margin-bottom: 0.5rem; color: #1a1a1a; }
+  .cert-issuer { font-size: 1rem; color: #FF7F50; font-weight: 600; margin-bottom: 1.5rem; }
+  .proj-tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; color: #FB923C; font-weight: 500; margin-block-end: 0.8rem; }
+  .proj-title { font-family: 'Syne', sans-serif; font-weight: 700; color: white; font-size: 1rem; margin-block-end: 0.5rem; }
+  .proj-desc { font-size: 0.82rem; color: rgba(255,255,255,0.55); }
+  .proj-tech { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-block-start: 1rem; }
+  .tech-pill { font-size: 0.7rem; padding: 0.2rem 0.6rem; border-radius: 100px; background: rgba(249,115,22,0.2); color: #FED7AA; }
+
+  /* ===== CONTACT ===== */
+  .contact-section { background: var(--bg); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; max-inline-size: 700px; }
+  .contact-item {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1rem; border: 1px solid var(--border);
+    border-radius: 12px; text-decoration: none; color: var(--text);
+    background: var(--white); transition: border-color 0.2s;
+  }
+  .contact-item:hover { border-color: var(--coral); }
+  .contact-icon { inline-size: 40px; block-size: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .contact-label { font-size: 0.7rem; color: var(--muted); }
+  .contact-value { font-weight: 500; font-size: 0.88rem; }
+
+  /* ===== FOOTER ===== */
+  footer { text-align: center; padding: 2rem; font-size: 0.8rem; color: var(--muted); border-block-start: 1px solid var(--border); background: var(--white); }
+</style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav>
+  <span class="nav-logo">Alif.</span>
+  <ul class="nav-links">
+    <li><a href="#education">Tentang</a></li>
+    <li><a href="#skills">Keahlian</a></li>
+    <li><a href="#experience">Pengalaman</a></li>
+    <li><a href="#projects">Proyek</a></li>
+    <li><a href="#contact">Kontak</a></li>
+  </ul>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero" style="padding:0;">
+  <div class="hero-left">
+    <span class="hero-tag">Automation Engineering · Mahasiswa Undip</span>
+    <!-- Ganti "M Alif Zaend Maulana" dengan nama aslimu -->
+    <h1 class="hero-name"><span>M Alif Zaend Maulana</span></h1>
+    <p class="hero-bio">
+      Mahasiswa Teknologi Rekayasa Otomasi Universitas Diponegoro yang bersemangat
+      membangun solusi otomasi cerdas untuk industri dan bisnis.
+    </p>
+    <div class="hero-cta">
+      <button class="btn-primary">Lihat Proyek Saya</button>
+      <!-- Ganti href="#" dengan link CV kamu -->
+      <a href="CV M. Alif Zaend Maulana.pdf" class="btn-secondary" style="text-decoration:none; display:flex; align-items:center;">Unduh CV</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <!-- Placeholder untuk foto Anda -->
+    <div class="photo-placeholder">Unggah foto Anda nanti</div>
+  </div>
+</section>
+
+<!-- ===== TENTANG SAYA ===== -->
+<section class="edu-section" id="education">
+  <p class="section-label">Tentang</p>
+  <h2 class="section-title">Tentang Saya</h2>
+
+  <p style="font-size: 1rem; color: var(--muted); max-inline-size: 720px; line-height: 1.8; margin-block-end: 3rem;">
+    Saya adalah mahasiswa Teknologi Rekayasa Otomasi di Universitas Diponegoro dengan ketertarikan yang kuat dalam pengembangan teknologi dan sistem otomasi. Selama masa studi, saya telah mempelajari berbagai konsep teknis yang mendukung industri dan secara aktif terlibat dalam organisasi mahasiswa, di mana saya pernah menjabat sebagai Kepala Divisi. Pengalaman ini telah meningkatkan keterampilan saya dalam kepemimpinan, manajemen, kerja tim, dan komunikasi. Dengan latar belakang akademis yang solid dan pengalaman praktis, saya berkomitmen untuk terus belajar dan berkontribusi di bidang teknologi dan inovasi.
+  </p>
+
+  <p class="section-label">Latar Belakang Akademik</p>
+  <div class="edu-grid">
+
+    <!-- Universitas Diponegoro -->
+    <div class="edu-card undip">
+      <span class="edu-icon">🎓</span>
+      <span class="edu-badge undip-badge">Sedang berjalan</span>
+      <div class="edu-school undip-text">Universitas Diponegoro</div>
+      <div class="edu-major">Teknologi Rekayasa Otomasi</div>
+      <!-- Sesuaikan tahun masuk -->
+      <div class="edu-period">Semarang · 2023 – Sekarang</div>
+      <div class="edu-desc">
+        Mempelajari sistem kendali, PLC, robotika industri, instrumentasi,
+        dan integrasi sistem otomasi berbasis teknologi terkini.
+      </div>
+    </div>
+
+    <!-- SMKN 7 Semarang -->
+    <div class="edu-card smk">
+      <span class="edu-icon">🏫</span>
+      <span class="edu-badge smk-badge">Lulus</span>
+      <div class="edu-school smk-text">SMKN 7 Semarang</div>
+      <!-- Ganti jurusan jika berbeda -->
+      <div class="edu-major">Teknik Menejemen Perawatan Otomotif</div>
+      <!-- Sesuaikan tahun -->
+      <div class="edu-period">Semarang · 2019 – 2023</div>
+      <div class="edu-desc">
+        Mendapat fondasi kuat di bidang manajemen perawatan otomotif, mekanik kendaraan,
+        dan praktik kerja industri yang menjadi bekal utama di bidang otomasi.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== KEAHLIAN ===== -->
+<section class="skills-section" id="skills">
+  <p class="section-label">Keahlian</p>
+  <h2 class="section-title">Yang bisa saya lakukan</h2>
+  <div class="skills-grid">
+
+    <div class="skill-card">
+      <div class="skill-icon" style="background:#FAECE7;">⚙️</div>
+      <div class="skill-name">PLC & Sistem Kendali</div>
+      <div class="skill-desc">Siemens TIA Portal, OMRON, ladder diagram</div>
+      <div class="bar-wrap"><div class="bar-fill" style="inline-size:85%; background:#D85A30;"></div></div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-icon" style="background:#EEEDFE;">💻</div>
+      <div class="skill-name">Pemrograman</div>
+      <div class="skill-desc">Python, C/C++</div>
+      <div class="bar-wrap"><div class="bar-fill" style="inline-size:75%; background:#534AB7;"></div></div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-icon" style="background:#FAEEDA;">📊</div>
+      <div class="skill-name">Instrumentasi & Sensor</div>
+      <div class="skill-desc">ESP32, STM32, Arduino, sensor industri, HMI</div>
+      <div class="bar-wrap"><div class="bar-fill" style="inline-size:78%; background:#BA7517;"></div></div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-icon" style="background:#FEE2E4;">🎨</div>
+      <div class="skill-name">SolidWorks</div>
+      <div class="skill-desc">3D Modeling, Assembly, 2D Drawing</div>
+      <div class="bar-wrap"><div class="bar-fill" style="inline-size:70%; background:#CA8A04;"></div></div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-icon" style="background:#E6F2FF;">📄</div>
+      <div class="skill-name">Microsoft Office</div>
+      <div class="skill-desc">Word, Excel, PowerPoint</div>
+      <div class="bar-wrap"><div class="bar-fill" style="inline-size:85%; background:#0EA5E9;"></div></div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-icon" style="background:#F3E8FF;">🎭</div>
+      <div class="skill-name">Design & Editing</div>
+      <div class="skill-desc">Canva, visual content creation</div>
+      <div class="bar-wrap"><div class="bar-fill" style="inline-size:75%; background:#A855F7;"></div></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== PENGALAMAN ===== -->
+<section class="exp-section" id="experience">
+  <p class="section-label">Pengalaman</p>
+  <h2 class="section-title">Perjalanan karier</h2>
+  <div class="timeline">
+
+    <div class="exp-item">
+      <div class="exp-dot-col">
+        <div class="exp-dot"></div>
+        <span class="exp-line"></span>
+      </div>
+      <div class="exp-content">
+        <div class="exp-top">
+          <div style="display:flex; align-items:center; gap:0.9rem;">
+            <img src="foto/kadiv.png" alt="Head of Potential Development Division" style="width:72px; height:72px; object-fit:cover; border-radius:10px; border:1px solid var(--border);">
+            <div>
+              <div class="exp-role">Head of Potential Development Division</div>
+              <div class="exp-company">HIMATRO</div>
+            </div>
+          </div>
+          <span class="exp-period">Apr 2025 – Feb 2026</span>
+        </div>
+        <p class="exp-desc">Led dan koordinasi divisi untuk program pengembangan skill dan personal development mahasiswa, desain inisiatif untuk mendukung pertumbuhan member.</p>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-dot-col">
+        <div class="exp-dot" style="background:#F97316;"></div>
+        <span class="exp-line"></span>
+      </div>
+      <div class="exp-content">
+        <div class="exp-top">
+          <div style="display:flex; align-items:center; gap:0.9rem;">
+            <img src="foto/staff.png" alt="Junior Staff – Potential Development Division" style="width:72px; height:72px; object-fit:cover; border-radius:10px; border:1px solid var(--border);">
+            <div>
+              <div class="exp-role">Junior Staff – Potential Development Division</div>
+              <div class="exp-company">HIMATRO</div>
+            </div>
+          </div>
+          <span class="exp-period">May 2024 – Apr 2025</span>
+        </div>
+        <p class="exp-desc">Mengembangkan program peningkatan skill dan personal development, berkontribusi dalam membuat materi promosi entrepreneurship yang engaging.</p>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-dot-col">
+        <div class="exp-dot" style="background:#534AB7;"></div>
+        <span class="exp-line"></span>
+      </div>
+      <div class="exp-content">
+        <div class="exp-top">
+          <div>
+            <div class="exp-role">Moderator — Class of Development</div>
+            <div class="exp-company">Diponegoro University</div>
+          </div>
+          <span class="exp-period">Sep 2024</span>
+        </div>
+        <p class="exp-desc">Memfasilitasi kelas pengembangan untuk mahasiswa dengan fokus pada peningkatan skill dan kompetensi teknis.</p>
+      </div>
+    </div>
+
+    <div class="exp-item clickable">
+      <div class="exp-dot-col">
+        <div class="exp-dot" style="background:#BA7517;"></div>
+        <span class="exp-line"></span>
+      </div>
+      <div class="exp-content" onclick="openCertModal('internship')">
+        <div class="exp-top">
+          <div>
+            <div class="exp-role">Internship</div>
+            <div class="exp-company">Sun Star Motor Mitsubishi</div>
+          </div>
+          <span class="exp-period">Jul 2022 – Dec 2022</span>
+        </div>
+        <p class="exp-desc">Praktik kerja industri mendapatkan pengalaman langsung di bidang automotive, workshop management, dan sistem kendaraan. <span style="color: var(--orange); font-weight: 500;">📋 Klik untuk melihat sertifikat</span></p>
+      </div>
+    </div>
+
+    <div class="exp-item clickable">
+      <div class="exp-dot-col">
+        <div class="exp-dot" style="background:#F97316;"></div>
+      </div>
+      <div class="exp-content" onclick="openCertModal('daihatsu')">
+        <div class="exp-top">
+          <div>
+            <div class="exp-role">Certified Training – Astra Daihatsu Zirang</div>
+            <div class="exp-company">Astra Daihatsu Motor</div>
+          </div>
+          <span class="exp-period">May 2023</span>
+        </div>
+        <p class="exp-desc">Pelatihan sertifikasi kompetency di bidang automotive maintenance untuk meningkatkan keahlian teknis dan industri. <span style="color: var(--orange); font-weight: 500;">📋 Klik untuk melihat sertifikat</span></p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== PROYEK ===== -->
+<section class="projects-section" id="projects">
+  <p class="section-label">Proyek</p>
+  <h2 class="section-title">Karya unggulan</h2>
+  <div class="projects-grid">
+
+    <!-- Ganti setiap proj-card dengan proyek aslimu -->
+    <div class="proj-card" onclick="openModal(1)">
+      <div class="proj-tag">Electrical · Sistem Kendali</div>
+      <div class="proj-title">Kontrol Suhu pada Boiler Sederhana</div>
+      <div class="proj-desc">Perancangan dan implementasi sistem kontrol suhu otomatis pada boiler sederhana menggunakan sensor dan sistem kendali elektronik.</div>
+      <div class="proj-tech">
+        <span class="tech-pill">Sensor Suhu</span>
+        <span class="tech-pill">Kontrol Relay</span>
+        <span class="tech-pill">Electronic</span>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-tag">P2MW · Kewirausahaan</div>
+      <div class="proj-title">Lolos P2MW Tingkat Universitas</div>
+      <div class="proj-desc">Berhasil lolos seleksi P2MW tingkat universitas melalui penyusunan ide usaha, proposal, dan presentasi tim yang terarah.</div>
+      <div class="proj-tech">
+        <span class="tech-pill">P2MW</span>
+        <span class="tech-pill">Business Plan</span>
+        <span class="tech-pill">Pitch Deck</span>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-tag">Skrip · Otomasi</div>
+      <div class="proj-title">Otomasi Pengolahan Data Laporan</div>
+      <div class="proj-desc">Skrip Python yang mengotomasi pengumpulan, pengolahan, dan ekspor laporan dari berbagai sumber data ke Excel.</div>
+      <div class="proj-tech">
+        <span class="tech-pill">Python</span>
+        <span class="tech-pill">pandas</span>
+        <span class="tech-pill">openpyxl</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== PROJECT MODAL ===== -->
+<div id="modal1" class="modal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal(1)">✕</button>
+    <div class="modal-carousel">
+      <div class="carousel-container" id="carouselContainer1">
+        <div class="carousel-slide">
+          <img src="foto/projek kontrol suhu .jpeg" alt="Kontrol Suhu Boiler">
+        </div>
+        <div class="carousel-slide">
+          <img src="foto/elektrical pemanas.png" alt="Electrical Pemanas">
+        </div>
+      </div>
+      <button class="carousel-arrow carousel-prev" onclick="slideCarousel(1, -1)">❮</button>
+      <button class="carousel-arrow carousel-next" onclick="slideCarousel(1, 1)">❯</button>
+      <div class="carousel-nav">
+        <span class="carousel-dot active" onclick="goToSlide(1, 0)"></span>
+        <span class="carousel-dot" onclick="goToSlide(1, 1)"></span>
+      </div>
+    </div>
+    <div class="modal-tag">Electrical · Sistem Kendali</div>
+    <div class="modal-title">Kontrol Suhu pada Boiler Sederhana</div>
+    <div class="modal-desc">
+      Perancangan dan implementasi sistem kontrol suhu otomatis pada boiler sederhana menggunakan sensor dan sistem kendali elektronik untuk menjaga temperatur optimal. Proyek ini menggabungkan teori sistem kendali dengan aplikasi praktis, menggunakan sensor suhu dan relay kontrol untuk mengatur elemen pemanas secara otomatis berdasarkan setpoint yang ditentukan.
+    </div>
+    <div class="modal-tech">
+      <span class="tech-pill">Sensor Suhu</span>
+      <span class="tech-pill">Kontrol Relay</span>
+      <span class="tech-pill">Electronic</span>
+      <span class="tech-pill">Sistem Kendali</span>
+    </div>
+  </div>
+</div>
+
+
+<!-- ===== CERT MODALS ===== -->
+<!-- Internship Certificate Modal -->
+<div id="certInternship" class="cert-modal">
+  <div class="cert-modal-content">
+    <button class="cert-close" onclick="closeCertModal('internship')">✕</button>
+    <img src="foto/sertifikat magang .jpeg" alt="Sertifikat Magang" class="cert-image">
+    <div class="cert-info">
+      <div class="cert-title">Sertifikat Magang</div>
+      <div class="cert-issuer">Sun Star Motor Mitsubishi · Juli - Desember 2022</div>
+      <p style="font-size: 0.9rem; color: var(--muted); line-height: 1.6;">
+        Sertifikat yang diberikan setelah menyelesaikan program magang selama 6 bulan di Sun Star Motor Mitsubishi, dengan fokus pada automotive maintenance, workshop management, dan automotive systems.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Daihatsu Certificate Modal -->
+<div id="certDaihatsu" class="cert-modal">
+  <div class="cert-modal-content">
+    <button class="cert-close" onclick="closeCertModal('daihatsu')">✕</button>
+    <img src="foto/sertifikat daihatsu .jpeg" alt="Sertifikat Daihatsu" class="cert-image">
+    <div class="cert-info">
+      <div class="cert-title">Certified Basic Automotive Competency Training</div>
+      <div class="cert-issuer">Astra Daihatsu Motor (Astra Zirang) · Mei 2023</div>
+      <p style="font-size: 0.9rem; color: var(--muted); line-height: 1.6;">
+        Sertifikat kompetensi dasar di bidang automotive yang diakui oleh Astra Daihatsu Motor, memvalidasi pengetahuan dan keterampilan teknis di automotive maintenance dan systems.
+      </p>
+    </div>
+  </div>
+</div>
+
+
+<section class="contact-section" id="contact">
+  <p class="section-label">Kontak</p>
+  <h2 class="section-title">Hubungi saya</h2>
+  <div class="contact-grid">
+
+    <!-- Ganti setiap href dan teks dengan info kontakmu yang asli -->
+    <a class="contact-item" href="mailto:malifmalif87@gmail.com">
+      <div class="contact-icon" style="background:#FAECE7;">📧</div>
+      <div>
+        <div class="contact-label">Email</div>
+        <div class="contact-value">malifmalif87@gmail.com</div>
+      </div>
+    </a>
+
+    <a class="contact-item" href="https://www.linkedin.com/in/m-alif-zaend-maulana-105463334" target="_blank">
+      <div class="contact-icon" style="background:#EEF3FB;">💼</div>
+      <div>
+        <div class="contact-label">LinkedIn</div>
+        <div class="contact-value">linkedin.com/in/m-alif-zaend-maulana</div>
+      </div>
+    </a>
+
+    <a class="contact-item" href="https://wa.me/6285951656447" target="_blank">
+      <div class="contact-icon" style="background:#F3F4F6;">📱</div>
+      <div>
+        <div class="contact-label">WhatsApp</div>
+        <div class="contact-value">+62 859-5165-6447</div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  &copy; 2026 M Alif Zaend Maulana · Mahasiswa Teknologi Rekayasa Otomasi — Universitas Diponegoro
+</footer>
+
+<script>
+const carouselStates = {};
+
+function initCarousel(id) {
+  if (!carouselStates[id]) {
+    carouselStates[id] = { current: 0, total: 2 };
+  }
+}
+
+function slideCarousel(id, direction) {
+  initCarousel(id);
+  const state = carouselStates[id];
+  state.current += direction;
+
+  if (state.current >= state.total) {
+    state.current = 0;
+  } else if (state.current < 0) {
+    state.current = state.total - 1;
+  }
+
+  updateCarousel(id);
+}
+
+function goToSlide(id, index) {
+  initCarousel(id);
+  carouselStates[id].current = index;
+  updateCarousel(id);
+}
+
+function updateCarousel(id) {
+  const container = document.getElementById(`carouselContainer${id}`);
+  const offset = -carouselStates[id].current * 100;
+  container.style.transform = `translateX(${offset}%)`;
+
+  const dots = document.querySelectorAll(`#carousel${id} .carousel-dot`);
+  dots.forEach((dot, index) => {
+    if (index === carouselStates[id].current) {
+      dot.classList.add('active');
+    } else {
+      dot.classList.remove('active');
+    }
+  });
+}
+</script>
+
+<script>
+function openModal(id) {
+  const modal = document.getElementById(`modal${id}`);
+  if (modal) {
+    modal.classList.add('active');
+    initCarousel(id);
+  }
+}
+
+function closeModal(id) {
+  const modal = document.getElementById(`modal${id}`);
+  if (modal) {
+    modal.classList.remove('active');
+  }
+}
+
+// Close modal when clicking outside content
+document.addEventListener('click', function(event) {
+  const modals = document.querySelectorAll('.modal.active');
+  modals.forEach(modal => {
+    if (event.target === modal) {
+      modal.classList.remove('active');
+    }
+  });
+});
+</script>
+
+<script>
+function openCertModal(type) {
+  const modalMap = {
+    'internship': 'certInternship',
+    'daihatsu': 'certDaihatsu'
+  };
+  const certModal = document.getElementById(modalMap[type]);
+  if (certModal) {
+    certModal.classList.add('active');
+  }
+}
+
+function closeCertModal(type) {
+  const modalMap = {
+    'internship': 'certInternship',
+    'daihatsu': 'certDaihatsu'
+  };
+  const certModal = document.getElementById(modalMap[type]);
+  if (certModal) {
+    certModal.classList.remove('active');
+  }
+}
+
+// Close cert modal when clicking outside content
+document.addEventListener('click', function(event) {
+  const certModals = document.querySelectorAll('.cert-modal.active');
+  certModals.forEach(certModal => {
+    if (event.target === certModal) {
+      certModal.classList.remove('active');
+    }
+  });
+});
+</script>
+
+</body>
+</html>
